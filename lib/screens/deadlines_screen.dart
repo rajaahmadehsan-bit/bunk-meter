@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/screen_background.dart';
 
 class DeadlinesScreen extends StatelessWidget {
   const DeadlinesScreen({super.key});
@@ -8,33 +10,55 @@ class DeadlinesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Deadlines')),
-      body: const SingleChildScrollView(
+      drawer: const AppDrawer(),
+      body: ScreenBackground(
+        image: 'assets/images/bg_deadlines.jpg',
+        child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(8),
           child: Column(
             children: [
-              _DeadlineCard(
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFEBEE),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColors.red),
+                ),
+                child: const Row(
+                  children: [
+                    Icon(Icons.alarm, color: AppColors.red),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Text('Next deadline: Assignment 2: Project UI is due in 2 days.'),
+                    ),
+                  ],
+                ),
+              ),
+              const _DeadlineCard(
                 icon: Icons.assignment,
                 title: 'Assignment 2: Project UI',
                 course: 'Mobile App Development',
                 due: 'In 2 days',
                 color: AppColors.red,
               ),
-              _DeadlineCard(
+              const _DeadlineCard(
                 icon: Icons.quiz,
                 title: 'Quiz 1: SQL Basics',
                 course: 'Database Systems',
                 due: 'In 5 days',
                 color: AppColors.amber,
               ),
-              _DeadlineCard(
+              const _DeadlineCard(
                 icon: Icons.menu_book,
                 title: 'Midterm Exam',
                 course: 'Data Structures',
                 due: 'In 12 days',
                 color: AppColors.green,
               ),
-              _DeadlineCard(
+              const _DeadlineCard(
                 icon: Icons.assignment,
                 title: 'SRS Document',
                 course: 'Software Engineering',
@@ -44,6 +68,7 @@ class DeadlinesScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

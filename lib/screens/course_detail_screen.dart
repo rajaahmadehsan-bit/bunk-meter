@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/screen_background.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   const CourseDetailScreen({super.key});
@@ -8,7 +10,10 @@ class CourseDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Course Detail')),
-      body: SingleChildScrollView(
+      drawer: const AppDrawer(),
+      body: ScreenBackground(
+        image: 'assets/images/bg_detail.jpg',
+        child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -72,6 +77,27 @@ class CourseDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Attendance rule container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE8EAF6),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Attendance rule',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 6),
+                    Text('Minimum required: 75%'),
+                    Text('Your current attendance: 90% (15% above the limit)'),
+                  ],
                 ),
               ),
               const SizedBox(height: 20),
@@ -150,6 +176,7 @@ class CourseDetailScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

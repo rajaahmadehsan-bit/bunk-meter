@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/screen_background.dart';
 
 class TodayScreen extends StatelessWidget {
   const TodayScreen({super.key});
@@ -8,20 +10,42 @@ class TodayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Today's Classes")),
-      body: const SingleChildScrollView(
+      drawer: const AppDrawer(),
+      body: ScreenBackground(
+        image: 'assets/images/bg_today.jpg',
+        child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(8),
           child: Column(
             children: [
-              _TodayClassCard(
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE8EAF6),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Row(
+                  children: [
+                    Icon(Icons.today, color: AppColors.primary),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Text('3 classes today. Mark attendance for each class below.'),
+                    ),
+                  ],
+                ),
+              ),
+              const _TodayClassCard(
                   name: 'Mobile App Development', time: '9:00 AM - 10:30 AM'),
-              _TodayClassCard(
+              const _TodayClassCard(
                   name: 'Database Systems', time: '11:00 AM - 12:30 PM'),
-              _TodayClassCard(
+              const _TodayClassCard(
                   name: 'Data Structures', time: '2:00 PM - 3:30 PM'),
             ],
           ),
         ),
+      ),
       ),
     );
   }

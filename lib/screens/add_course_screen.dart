@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/screen_background.dart';
 
 class AddCourseScreen extends StatelessWidget {
   const AddCourseScreen({super.key});
@@ -7,7 +9,10 @@ class AddCourseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Add Course')),
-      body: SingleChildScrollView(
+      drawer: const AppDrawer(),
+      body: ScreenBackground(
+        image: 'assets/images/bg_add.jpg',
+        child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -62,9 +67,35 @@ class AddCourseScreen extends StatelessWidget {
                   label: const Text('Save Course'),
                 ),
               ),
+
+              const SizedBox(height: 20),
+
+              // Tip container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE3F2FD),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.lightbulb, color: Colors.blue),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        'Tip: most universities require 75% attendance. '
+                        '"Planned total classes" is how many classes this course will hold in the semester.',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
+      ),
       ),
     );
   }

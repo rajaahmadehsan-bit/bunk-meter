@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/screen_background.dart';
 import '../widgets/course_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,7 +11,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('My Courses')),
-      body: SingleChildScrollView(
+      drawer: const AppDrawer(),
+      body: ScreenBackground(
+        image: 'assets/images/bg_home.jpg',
+        child: SingleChildScrollView(
         child: Column(
           children: [
             // Banner image
@@ -34,6 +39,28 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
+
+            // Alert container
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFEBEE),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColors.red),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.warning_amber_rounded, color: AppColors.red),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'Data Structures is below 75%. Attend the next 4 classes to recover.',
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             // The same widget used 4 times with different dummy data
             const CourseCard(
@@ -75,6 +102,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 80), // space so the button doesn't cover the last card
           ],
         ),
+      ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {}, // does nothing yet
